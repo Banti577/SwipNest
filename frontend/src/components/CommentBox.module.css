@@ -1,0 +1,150 @@
+/* Base Styles */
+.commentSection {
+  margin-top: 1rem;
+}
+
+.commentInputBox {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.commentInputBox textarea {
+  width: 100%;
+  min-height: 60px;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ddd;
+  resize: vertical;
+  font-size: 16px;
+}
+
+.commentButtons {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: end;
+}
+
+.commentButtons button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  background: #2563eb;
+  color: white;
+  font-size: 15px;
+  transition: 0.2s;
+}
+
+.commentButtons button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.commentButtons button:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+.comment {
+  padding: 0.75rem;
+  background: #f9f9f9;
+  border-radius: 0.75rem;
+  border: 1px solid #eee;
+}
+
+.commentHeader {
+  font-size: 17px;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
+.edited {
+  font-size: 12px;
+  color: gray;
+  margin-left: 0.25rem;
+}
+
+.commentText {
+  font-size: 15px;
+  margin-bottom: 0.5rem;
+}
+
+.commentActions {
+  display: flex;
+  gap: 1rem;
+  font-size: 14px;
+  color: #555;
+  cursor: pointer;
+}
+
+.commentActions span:hover {
+  text-decoration: underline;
+}
+
+.commentReplies {
+  margin-left: 1rem;
+  margin-top: 0.5rem;
+  border-left: 2px solid #ddd;
+  padding-left: 0.75rem;
+}
+
+.reply {
+  margin-bottom: 0.5rem;
+}
+
+.replyText {
+  font-size: 14px;
+}
+
+/* Toast Styles */
+.toastContainer {
+  /*position: fixed;
+  top: 1rem;
+  right: 1rem;*/
+  z-index: 9999;
+}
+
+.toast {
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  color: white;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.toast.success { background: #16a34a; }
+.toast.error { background: #dc2626; }
+.toast.info { background: #2563eb; }
+
+
+
+/* Responsive Typography */
+@media (max-width: 499px) {
+  .commentHeader { font-size: 20px; }
+  .commentText { font-size: 18px; }
+  .commentActions { font-size: 16px; }
+  .replyText { font-size: 17px; }
+}
+
+@media (min-width: 500px) and (max-width: 720px) {
+  .commentHeader { font-size: 19px; }
+  .commentText { font-size: 17px; }
+  .commentActions { font-size: 15px; }
+  .replyText { font-size: 16px; }
+}
+
+@media (min-width: 721px) and (max-width: 991px) {
+  .commentHeader { font-size: 18px; }
+  .commentText { font-size: 16px; }
+  .commentActions { font-size: 14px; }
+  .replyText { font-size: 15px; }
+}
+
+@media (min-width: 992px) {
+  .commentHeader { font-size: 17px; }
+  .commentText { font-size: 15px; }
+  .commentActions { font-size: 14px; }
+  .replyText { font-size: 14px; }
+}

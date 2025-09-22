@@ -1,0 +1,191 @@
+/*
+  Complete and corrected CSS for a responsive navbar.
+  This version keeps the global class and adjusts the navbar
+  responsiveness for a range of screen sizes.
+*/
+
+/* -------------------- Global Styles -------------------- */
+:global(.d-lg-none) {
+  display: block !important;
+}
+
+/* -------------------- Navbar Styles -------------------- */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  flex-wrap: nowrap;
+
+  position: fixed;
+  top: 60px;      /* navbar ke neeche start karega */
+  left: 0;
+  top: 0;
+  /*height: 150px;*/
+  z-index: 1000;   /* navbar se neeche rahe */
+}
+
+.navbarBrand {
+  font-weight: bold;
+  font-size: 1.25rem;
+  color: #dc3545;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.searchBar {
+  display: flex;
+  flex-grow: 1;
+  max-width: 400px;
+  margin: 0 1rem;
+  position: relative;
+}
+
+.searchBar input {
+  flex-grow: 1;
+  padding: 0.3rem 0.5rem;
+  border: 1px solid #ccc;
+  border-right: none;
+  border-radius: 4px 0 0 4px;
+}
+
+.searchBar button {
+  padding: 0.3rem 0.5rem;
+  border: 1px solid #ccc;
+  border-left: none;
+  border-radius: 0 4px 4px 0;
+  background: #f8f9fa;
+  cursor: pointer;
+}
+
+.navbarRight {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.navbarRight .create-link {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: #dc3545;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* -------------------- Sidebar and Toggle Styles -------------------- */
+
+.navbarToggle {
+  display: none;
+  border: none;
+  background: transparent;
+  font-size: 1.5rem;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 250px;
+  background: #fff;
+  border-right: 1px solid #ddd;
+  z-index: 1040;
+  padding: 1rem;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1030;
+  display: none;
+}
+
+.overlay.show {
+  display: block;
+}
+
+/* -------------------- Responsive Styles -------------------- */
+
+/* For smaller screens where space is tight */
+@media (max-width: 991px) {
+  .navbarToggle {
+    display: inline-block;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-wrap: wrap; /* Allow items to wrap to a new line */
+  }
+
+  .navbarBrand,
+  .navbarRight {
+    flex-shrink: 0;
+  }
+
+  .searchBar {
+    max-width: 100%;
+    margin-top: 0.5rem;
+    order: 2; /* Put the search bar below other elements */
+  }
+
+  .navbarRight {
+    order: 3;
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .navbarToggle {
+    order: 1; /* Move the toggle to the front */
+  }
+
+  .navbarBrand {
+    order: 0; /* Position the brand next to the toggle */
+  }
+}
+
+.suggestions {
+  position: absolute;
+  background: white;
+  border: 1px solid #ddd;
+  width: 100%;
+  max-height: 250px;
+  overflow-y: auto;
+  list-style: none;
+  padding: 0;
+  margin-top: 4px;
+  border-radius: 6px;
+  z-index: 1000;
+  top: 35px;
+}
+
+.suggestions li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.suggestions li:hover {
+  background: #f5f5f5;
+}
+
+

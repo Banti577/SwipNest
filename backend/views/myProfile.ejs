@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Profile</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background: #f5f5f5;
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: 30px auto;
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .profile-section {
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
+      }
+
+      .avatar {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: #ccc;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 50px;
+      }
+
+      form {
+        flex: 1;
+      }
+
+      label {
+        font-weight: bold;
+        display: block;
+        margin-top: 10px;
+        margin-bottom: 5px;
+      }
+
+      input[type="text"],
+      textarea,
+      input[type="file"] {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      button {
+        padding: 10px 20px;
+        background: #2da44e;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+
+      .repos {
+        margin-top: 30px;
+      }
+
+      .repo {
+        border: 1px solid #ddd;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        background-color: #fafafa;
+      }
+
+      .repo-title {
+        font-size: 18px;
+        color: #0366d6;
+        font-weight: bold;
+      }
+
+      .repo-lang {
+        font-size: 14px;
+        color: #6a737d;
+        margin-top: 5px;
+      }
+
+      .stats {
+        margin-top: 30px;
+        font-size: 16px;
+      }
+
+      .stats span {
+        font-weight: bold;
+        color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <% if (locals.user) { %>
+    <div class="container">
+      <!-- Profile Section -->
+      <div class="profile-section">
+        <div class="avatar">👤</div>
+        <form
+          action="/update-profile"
+          method="POST"
+          enctype="multipart/form-data"
+        >
+          <label for="name">Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value="Banti Patel"
+            required
+          />
+
+          <label for="bio">Bio</label>
+          <textarea id="bio" name="bio" rows="3">
+Web Developer | Passionate Coder</textarea
+          >
+
+          <label>Gender:</label>
+          <input type="radio" name="gender" value="Male" id="male" /> Male
+          <input type="radio" name="gender" value="Female" id="female" />Female
+          <input type="radio" name="gender" value="Other" id="other" /> Other
+
+          <label for="avatar">Location</label>
+          <select name="" id="">
+            <option value="">indore</option>
+            <option value="">Delhi</option>
+            <option value="">Jaipur</option>
+          </select>
+
+          <label for="avatar">Profile Picture</label>
+          <input type="file" id="avatar" name="avatar" accept="image/*" />
+
+          <button type="submit">Update Profile</button>
+        </form>
+      </div>
+
+      <!-- Repositories -->
+      <div class="repos">
+        <h3>Popular Repositories</h3>
+
+        <div class="repo">
+          <div class="repo-title">Todo_list</div>
+          <div class="repo-lang">🟨 JavaScript</div>
+        </div>
+
+        <div class="repo">
+          <div class="repo-title">RealTimeClock</div>
+          <div class="repo-lang">🟪 CSS</div>
+        </div>
+
+        <div class="repo">
+          <div class="repo-title">CurrencyConverter</div>
+          <div class="repo-lang">🟨 JavaScript</div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats">
+        <p>🗨️ Total Comments Made: <span>47</span></p>
+        <p>📅 Joined: <span>Jan 2023</span></p>
+      </div>
+    </div>
+    <% } else { %>
+    <li class="nav-item">
+      <a class="nav-link" href="/user/login">Please Login First</a>
+    </li>
+
+    <% } %>
+  </body>
+</html>

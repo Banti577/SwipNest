@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <%- include('partial/head.ejs') %>
+  <title>Add Blog</title>
+  <style>
+    .container h1 {
+      text-align: center;
+      margin-top: 30px;
+      color: #333;
+    }
+    .container form {
+      margin: 40px auto;
+      padding: 30px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    }
+    .container form div {
+      margin-bottom: 18px;
+    }
+    .container label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 500;
+      color: #222;
+    }
+    .container input[type="text"], .container textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+      box-sizing: border-box;
+      resize: vertical;
+    }
+    .container textarea {
+      min-height: 100px;
+    }
+    .container button[type="submit"] {
+      background: #007bff;
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 4px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .container button[type="submit"]:hover {
+      background: #0056b3;
+    }
+
+    /* Comment Section */
+    .comment-section {
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 20px;
+      border-top: 1px solid #ccc;
+    }
+    .comment {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+    .profile-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 15px;
+    }
+    .comment-body {
+      flex: 1;
+    }
+    .comment-name {
+      font-weight: bold;
+    }
+    .comment-text {
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+  <%- include('partial/navbar.ejs') %>
+
+  <div class="container">
+    <h1>Add Blog</h1>
+    <form action="/blog" method="POST" enctype="multipart/form-data">
+      <div>
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required />
+      </div>
+      <div>
+        <label for="blogContent">Content:</label>
+        <textarea id="blogContent" name="content"></textarea>
+        <!--<div id="editor" contenteditable="true">Paste here...</div> -->
+      </div>
+      <div>
+        <label for="coverImage">Upload Cover Image</label>
+        <input type="file" id="coverImage" name="coverImage" required />
+      </div>
+      <button type="submit">Add Blog</button>
+    </form>
+
+    <!-- 🔁 Your original comment section kept as-is -->
+    <div class="comment-section">
+      <div class="comment">
+        <img src="/img/avatar.jpg" alt="User 1" class="profile-img">
+        <div class="comment-body">
+          <div class="comment-name">User 1</div>
+          <div class="comment-text">Great blog post! Really enjoyed the content.</div>
+        </div>
+      </div>
+      <div class="comment">
+        <img src="/img/avatar.jpg" alt="User 2" class="profile-img">
+        <div class="comment-body">
+          <div class="comment-name">User 2</div>
+          <div class="comment-text">Thanks for sharing your thoughts!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%- include('partial/script.ejs') %>
+
+  <!-- TinyMCE CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/tinymce@6.8.3/tinymce.min.js"></script>
+
+  <script>
+    tinymce.init({
+      selector: '#blogContent',
+      plugins: 'lists link image table code fullscreen paste media',
+      toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright | bullist numlist | blockquote link table media | code fullscreen',
+      height: 300,
+      paste_data_images: true,
+      paste_as_text: false,
+      extended_valid_elements: 'iframe[src|frameborder|style|scrolling|class|width|height|name|align|allowfullscreen|allow],video[controls|preload|width|height|poster|src],source[src|type]',
+      valid_children: '+body[iframe|video]',
+      content_style: "iframe, video { max-width: 100%; height: auto; }"
+    });
+  </script>
+
+   <script>/*
+ const form = document.getElementById("blogForm");
+  form.addEventListener("submit", function (e) {
+    const editor = document.getElementById("editor");
+    const hidden = document.getElementById("hiddenContent");
+    hidden.value = editor.innerHTML; // copying rich HTML content
+  });*/
+    </script>
+</body>
+</html>

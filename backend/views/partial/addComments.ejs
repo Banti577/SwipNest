@@ -1,0 +1,91 @@
+<style>
+  .comment-container {
+    display: flex;
+    align-items: center;
+    border-top: 1px solid #ccc;
+    padding: 10px;
+    justify-content: center;
+  }
+
+  .profile-pic {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 10px;
+    background-image: url("/images/profile.jpg"); /* Replace with actual image path */
+    background-size: cover;
+    background-position: center;
+  }
+
+  .emoji {
+    font-size: 20px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+
+  .comment-input {
+    flex: 1;
+    border: none;
+    border-bottom: 1px solid lightgray;
+    outline: none;
+    font-size: 14px;
+    padding: 5px;
+  }
+
+  .buttons {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+  }
+
+  .cancel-btn {
+    margin-right: 10px;
+    color: black;
+    cursor: pointer;
+  }
+
+  .comment-btn {
+    background-color: #e0e0e0;
+    color: #888;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 10px;
+    cursor: not-allowed;
+  }
+</style>
+
+<form action="/blog/comment/<%=blog._id %>" method="post">
+  <div class="comment-container">
+    <div class="profile-pic"></div>
+    <div class="emoji">😁</div>
+    <input
+      type="text"
+      name="comment"
+      class="comment-input"
+      placeholder="Write a comment..."
+    />
+    <div class="buttons">
+      <div class="cancel-btn">Cancel</div>
+      <button class="comment-btn" disabled>Comment</button>
+    </div>
+  </div>
+</form>
+
+<script>
+  const commentInput = document.querySelector(".comment-input");
+  const commentBtn = document.querySelector(".comment-btn");
+
+  commentInput.addEventListener("input", () => {
+    commentBtn.disabled = commentInput.value.trim() === "";
+    // commentBtn.disabled = false;
+    commentBtn.style.backgroundColor = commentBtn.disabled
+      ? "#e0e0e0"
+      : "#065fd4";
+    commentBtn.style.color = "#fff";
+  });
+
+  document.querySelector(".cancel-btn").addEventListener("click", () => {
+    commentInput.value = "";
+    commentBtn.disabled = true;
+  });
+</script>

@@ -1,0 +1,215 @@
+/* Container for the video page */
+
+.videoPage {
+  width: 60%;
+  max-width: 1200px;
+  font-family: Arial, sans-serif;
+}
+
+/* Video Player */
+.videoPlayer {
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  object-fit: contain;
+}
+
+/* Video title */
+.videoTitle {
+  font-size: 1.5rem;
+  margin: 15px 0 10px 0;
+  font-weight: bold;
+  color: #111;
+}
+
+/* Views and actions container */
+.videoMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  font-size: 14px;
+  color: #555;
+}
+
+/* Buttons container */
+.actions {
+  display: flex;
+  gap: 15px;
+}
+
+/* Individual action button */
+.actionBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+
+.actionBtn:hover {
+  color: #065fd4;
+}
+
+/* Channel section */
+.channelSection {
+  display: flex;
+  align-items: center;
+  border-top: 1px solid #ccc;
+  padding-top: 15px;
+  margin-bottom: 20px;
+  gap: 15px;
+}
+
+/* Channel image */
+.channelImg {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Channel info text */
+.channelInfo {
+  flex: 1;
+}
+
+.channelInfo h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #111;
+}
+
+.channelInfo span {
+  font-size: 0.85rem;
+  color: #555;
+}
+
+/* Follow/Unfollow button */
+.followBtn {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  background-color: red;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.followBtn:hover {
+  opacity: 0.9;
+}
+
+.unfollow {
+  background-color: black;
+}
+
+/* Description box */
+.descriptionBox {
+  background: #f9f9f9;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Responsive Styles */
+
+/* Mobile phones (≤499px) */
+@media (max-width: 399px) {
+    .videoContainerFixed {
+    position: fixed;
+    top:145px;
+    left: 0;
+    width: 100%;
+    background: black;
+    z-index: 200;
+    height: 200px;
+  }
+  .videoPage {
+    width: 100%;
+    margin: auto;
+  }
+
+  .videoPlayer {
+    height: auto;
+    height: 200px;
+  }
+
+  .channelSection {
+    /*flex-direction: column;*/
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .followBtn {
+    text-align: center;
+  }
+  .videoInfoONlY {
+    
+    margin: 20px;
+     margin-top: 300px;
+      z-index: 2;   
+    
+  }
+}
+
+/* Small tablets (500px–720px) */
+@media (min-width: 400px) and (max-width: 720px) {
+  .videoPage {
+    width: 100%;
+    margin: auto;
+  }
+  .videoInfoONlY {
+    margin: 20px;
+  }
+}
+
+/* Tablets (721px–991px) */
+@media (min-width: 721px) and (max-width: 991px) {
+
+  .videoPage {
+    width: 95%;
+    padding: 10px;
+    margin: auto;
+  }
+}
+
+/* Desktop (992px and above) */
+@media (min-width: 992px) {
+  .videoPage {
+    width: 60%;
+    padding: 15px;
+    max-width: 1200px;
+  }
+  .videoPageContainer {
+    display: flex;
+    margin: 0 auto;
+    justify-content: space-around;
+  }
+  .reletedPage {
+    width: 42%;
+  }
+  .videoPageRightComment {
+    justify-content: flex-start;
+  }
+
+  .videoPageRight {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    justify-items: center; /* har card apne cell ke beech me */
+    width: 80%;
+  }
+}
+
+.reletedPage .videoCard {
+  display: flex;
+  flex-direction: row !important;
+}

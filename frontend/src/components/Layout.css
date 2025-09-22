@@ -1,0 +1,80 @@
+/* Layout.css */
+
+.app {
+  display: flex;
+  min-height: 100vh;
+  background: #fafafa;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 200px;
+  height: 100vh;
+  background: #fff;
+  border-right: 1px solid #ddd;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transition: transform 0.3s ease;
+  z-index: 200;
+}
+
+/* Hide sidebar by default on mobile */
+.sidebar.hidden {
+  transform: translateX(-100%);
+}
+
+/* Main content */
+.main-content {
+  flex: 1;
+  margin-left: 0;
+  transition: margin-left 0.5s ease;
+  padding-top: 60px;
+}
+@media (max-width: 399px) {
+
+.main-content {
+  padding-top: 100px;
+}
+}
+
+@media (min-width: 400px) and (max-width: 720px) {
+.main-content {
+  /*padding-top: 130px;*/
+}
+}
+
+/* Navbar */
+.navbar {
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Adjust main content when sidebar is hidden */
+.main-content.full {
+  margin-left: 0;
+}
+
+/* Media queries */
+@media (max-width: 991px) {
+  .sidebar {
+    transform: translateX(-100%);
+    width: 80vw;
+    max-width: 320px;
+    z-index: 1040;
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+}
+
+@media (min-width: 1400px) {
+  .main-content {
+    margin-left: 200px;
+  }
+}

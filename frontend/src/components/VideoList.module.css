@@ -1,0 +1,30 @@
+.grid {
+  display: grid;
+    grid-template-columns: repeat(3, minmax(200px, 1fr)); /* 3 columns */
+  gap: 16px;
+  padding: 16px;
+  width: 80%;
+  width: auto;
+  
+}
+
+.link {
+  display: block;
+  text-decoration: none; /* remove underline from links */
+  color: inherit;        /* inherit text color */
+  width: 100%;  ;
+}
+
+/* Responsive */
+@media screen and (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+    place-items: center;
+  }
+}

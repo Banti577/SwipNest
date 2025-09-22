@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+  <%- include('partial/head.ejs') %>
+    <link rel="stylesheet" href="./signup.css">
+
+</head>
+<body>
+    <%- include('partial/navbar.ejs') %>
+
+    <div class="container mt-4">
+        <h1>Sign Up</h1>
+        <form action="/user/signup" method="post">
+            <div class="form-group">
+                <label for="FullName">Full Name</label>
+                <input type="text" id="username" name="FullName" required class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required class="form-control">
+            </div>
+            <div class="form-group mb-3">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required class="form-control">
+            </div>
+            <button  type="submit" class="btn btn-primary" >Sign Up</button>
+        </form>
+        <div style="text-align:center; margin-top:18px;">
+        <span>Already have an account?</span>
+        <a href="/user/login" style="color:#805ad5; text-decoration:underline;">Login</a>
+    </div>
+    </div>
+
+    <%- include('partial/script.ejs') %>
+</body>
+</html>

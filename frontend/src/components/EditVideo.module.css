@@ -1,0 +1,84 @@
+.editContainer {
+  padding: 20px;
+  max-width: 600px;
+  margin: auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.editContainer h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.formGroup {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.formGroup label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #444;
+}
+
+.input,
+.textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  font-size: 14px;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.thumbnailPreview {
+  width: 150px;
+  height: auto;
+  border-radius: 10px;
+  margin-top: 10px;
+  object-fit: cover;
+  border: 1px solid #ddd;
+}
+
+.btnGroup {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.saveBtn {
+  background-color: #007bff;
+  color: white;
+}
+
+.saveBtn:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.deleteBtn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.cancelBtn {
+  background-color: #6c757d;
+  color: white;
+}
