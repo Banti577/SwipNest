@@ -7,6 +7,8 @@ const Video = require("../models/videoModel");
 const View = require("../models/videoViewModel");
 const videoComment = require('../models/videoCommentModel');
 const VideoViewModel = require("../models/videoViewModel");
+const { uploadFileToCloudinary } = require("../controller/videoController");
+
 
 
 const router = express.Router();
@@ -300,28 +302,19 @@ router.put('/editVideo/:videoId', upload.single("thumbnail"), async (req, res) =
     const video = await Video.findById(videoID);
     if (!video) return res.status(404).json({ message: "Video not found" });
 
-    // Authorization: only uploader can edit
     if (video.uploadedBy.toString() !== userID.toString()) {
       return res.status(403).json({ message: "You are not authorized to edit this video" });
     }
 
-    // Update basic fields
+    // Update fields
     if (req.body.title) video.title = req.body.title;
     if (req.body.description) video.description = req.body.description;
     if (req.body.category) video.category = req.body.category;
 
-    // Update thumbnail if provided
+    // Update thumbnail only
     if (req.file) {
-      // Delete old thumbnail from Cloudinary if public_id exists
-      if (video.thumbnailPublicId) {
-        await cloudinary.uploader.destroy(video.thumbnailPublicId);
-      }
-
-      // Upload new thumbnail using buffer
       const thumbResult = await uploadFileToCloudinary(req.file.buffer, { folder: "thumbnails" });
-
-      video.thumbnailUrl = thumbResult.secure_url;
-      video.thumbnailPublicId = thumbResult.public_id; // store public_id for future deletion
+      video.thumbnailUrl = thumbResult.secure_url; // Update only URL
     }
 
     const updatedVideo = await video.save();
@@ -329,10 +322,11 @@ router.put('/editVideo/:videoId', upload.single("thumbnail"), async (req, res) =
 
     res.status(200).json({ message: "Thumbnail updated successfully", video: updatedVideo });
   } catch (err) {
-    console.error("Error updating thumbnail:", err);
+    console.error(err);
     res.status(500).json({ message: "Server error", error: err.message });
   }
 });
+
 
 
 //Delete A Video
