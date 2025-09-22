@@ -10,7 +10,7 @@ const cloudinary = require("../cloudinary");
 ffmpeg.setFfprobePath(ffprobeStatic.path);
 
 // Helper function to upload buffer to Cloudinary safely
-exports.const uploadFileToCloudinary = (buffer, options) => {
+const uploadFileToCloudinary = (buffer, options) => {
   return new Promise((resolve, reject) => {
     try {
       const stream = cloudinary.uploader.upload_stream(options, (error, result) => {
@@ -111,4 +111,4 @@ exports.uploadVideo = async (req, res) => {
     res.status(500).json({ message: "Error uploading video", error: err.message });
   }
 };
-
+exports.uploadFileToCloudinary = uploadFileToCloudinary; 
