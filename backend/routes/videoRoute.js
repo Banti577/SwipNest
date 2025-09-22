@@ -1,13 +1,11 @@
 const express = require("express");
 const multer = require("multer");
 const cloudinary = require("../cloudinary");
-
-const { uploadVideo } = require("../controller/videoController");
 const Video = require("../models/videoModel");
 const View = require("../models/videoViewModel");
 const videoComment = require('../models/videoCommentModel');
 const VideoViewModel = require("../models/videoViewModel");
-const { uploadFileToCloudinary } = require("../controller/videoController");
+const { uploadVideo, uploadFileToCloudinary } = require("../controller/videoController");
 
 
 
