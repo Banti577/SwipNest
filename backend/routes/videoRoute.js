@@ -302,41 +302,37 @@ router.put('/editVideo/:videoId', upload.single("thumbnail"), async (req, res) =
     const video = await Video.findById(videoID);
     if (!video) return res.status(404).json({ message: "Video not found" });
 
-    // Only uploader can edit
     if (video.uploadedBy.toString() !== userID.toString()) {
       return res.status(403).json({ message: "You are not authorized" });
     }
 
-    // Update other fields
-    if (req.body.title) video.title = req.body.title;
-    if (req.body.description) video.description = req.body.description;
-    if (req.body.category) video.category = req.body.category;
+    // Update fields
+    ['title', 'description', 'category'].forEach(field => {
+      if (req.body[field]) video[field] = req.body[field];
+    });
 
-    // Update thumbnail if file exists
-    if (req.file) {
-      if (!req.file.buffer) {
-        return res.status(400).json({ message: "Thumbnail file is invalid" });
-      }
-
-      // Upload to Cloudinary
+    // Update thumbnail if provided
+    if (req.file?.buffer) {
       const result = await uploadFileToCloudinary(req.file.buffer, { folder: "thumbnails" });
+      if (!result?.secure_url) return res.status(500).json({ message: "Thumbnail upload failed" });
 
-      if (!result || !result.secure_url) {
-        return res.status(500).json({ message: "Failed to upload thumbnail to Cloudinary" });
-      }
+      // Optional: delete old thumbnail
+      // if (video.thumbnailUrl) { await cloudinary.uploader.destroy(<old_public_id>); }
 
-      video.thumbnailUrl = result.secure_url; // update only URL
+      video.thumbnailUrl = result.secure_url;
     }
 
     const updatedVideo = await video.save();
     await updatedVideo.populate("uploadedBy", "FullName profilePicture");
 
     res.status(200).json({ message: "Video updated successfully", video: updatedVideo });
+
   } catch (err) {
     console.error("Error updating video:", err);
     res.status(500).json({ message: "Server error", error: err.message });
   }
 });
+
 
 
 
