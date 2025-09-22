@@ -28,7 +28,7 @@ const playlistRouter  = require('./routes/playlistRoute');
 app.use(cors({
   
   origin: "http://localhost:3000",
-  origin:"http://10.55.80.212:3000",
+  origin:"https://swipnest.vercel.app",
   credentials: true
 }));
 
