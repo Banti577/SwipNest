@@ -208,6 +208,8 @@ function VideoPage({ user, videos }) {
             controls
             onPlay={handleView}
             autoPlay
+            controlsList="nodownload"
+            poster
           >
             <source src={`${video.videoUrl}`} type="video/mp4" />
           </video>
