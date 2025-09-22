@@ -292,30 +292,48 @@ router.delete('/deleteComment/:commentId', async (req, res) => {
 
 
 router.put('/editVideo/:videoId', upload.single("thumbnail"), async (req, res) => {
-
   try {
+    const videoID = req.params.videoId;
+    const userID = req.user?._id;
+    if (!userID) return res.status(401).json({ message: "Login required" });
 
-    const videoID = req.params.videoId
-    if (!req.user) return res.status(401).json({ message: "Login to comment" });
     const video = await Video.findById(videoID);
-    if (!video) {
-      return res.status(404).json({ message: "Video not found" });
+    if (!video) return res.status(404).json({ message: "Video not found" });
+
+    // Authorization: only uploader can edit
+    if (video.uploadedBy.toString() !== userID.toString()) {
+      return res.status(403).json({ message: "You are not authorized to edit this video" });
     }
+
+    // Update basic fields
     if (req.body.title) video.title = req.body.title;
     if (req.body.description) video.description = req.body.description;
     if (req.body.category) video.category = req.body.category;
+
+    // Update thumbnail if provided
     if (req.file) {
-      video.thumbnailUrl = `/uploads/videos/${req.file.filename}`; // folder ke relative path ke saath
+      // Delete old thumbnail from Cloudinary if public_id exists
+      if (video.thumbnailPublicId) {
+        await cloudinary.uploader.destroy(video.thumbnailPublicId);
+      }
+
+      // Upload new thumbnail using buffer
+      const thumbResult = await uploadFileToCloudinary(req.file.buffer, { folder: "thumbnails" });
+
+      video.thumbnailUrl = thumbResult.secure_url;
+      video.thumbnailPublicId = thumbResult.public_id; // store public_id for future deletion
     }
-    await video.save(); // DB me update ho jayega
 
-    return res.json({ message: "Video updated successfully", video });
+    const updatedVideo = await video.save();
+    await updatedVideo.populate("uploadedBy", "FullName profilePicture");
+
+    res.status(200).json({ message: "Thumbnail updated successfully", video: updatedVideo });
   } catch (err) {
-    return res.status(500).json({ message: "Server error" });
-
-
+    console.error("Error updating thumbnail:", err);
+    res.status(500).json({ message: "Server error", error: err.message });
   }
-})
+});
+
 
 //Delete A Video
 
