@@ -64,7 +64,7 @@ async function handleUserLogin(req, res) {
     httpOnly: true,
     maxAge: 60 * 60 * 1000, // 1 hour
     // maxAge: 60 * 1000, // 50 seconds for testing
-    sameSite: 'lax',
+     sameSite: 'lax',
       secure: true,
   });
 
