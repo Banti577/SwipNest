@@ -111,3 +111,8 @@ exports.uploadVideo = async (req, res) => {
     res.status(500).json({ message: "Error uploading video", error: err.message });
   }
 };
+
+module.exports = {
+  uploadVideo,
+  uploadFileToCloudinary, // <--- export it
+};
