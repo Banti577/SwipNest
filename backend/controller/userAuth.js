@@ -23,7 +23,8 @@ async function handleUserSignUp(req, res) {
   req.session.email = email;
   req.session.otp = otp;
 
-  // ✅ 4. Send OTP via email
+  
+  /* // ✅ 4. Send OTP via email
   const transporter = nodemailer.createTransport({
      port: 587,
     host: 'smtp.gmail.com',
@@ -41,7 +42,19 @@ async function handleUserSignUp(req, res) {
     to: email,
     subject: 'Your OTP for Signup',
     html: `<h3>Your OTP is: ${otp}</h3>`
-  });
+  });*/
+
+  //SendGrid Api se
+
+  const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+await sgMail.send({
+  to: email,
+  from: process.env.EMAIL_USER,
+  subject: 'Your OTP for Signup',
+  html: `<h3>Your OTP is: ${otp}</h3>`
+});
 
   //res.render('verifyOTP', { email }); // Create this form page
   res.status(200).json({ message: 'OTP sent successfully', email });
