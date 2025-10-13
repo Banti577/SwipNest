@@ -48,9 +48,9 @@ async function handleUserSignUp(req, res) {
 
   const sgMail = require('@sendgrid/mail');
   sgMail.setApiKey(process.env.SENDGRID_API_KEY.trim());
-
 await sgMail.send({
   to: email,
+  console.log('ye email piche se milaa', process.env.EMAIL_USER);
   from: process.env.EMAIL_USER,
   subject: 'Your OTP for Signup',
   html: `<h3>Your OTP is: ${otp}</h3>`
