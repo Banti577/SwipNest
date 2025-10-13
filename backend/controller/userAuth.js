@@ -25,7 +25,11 @@ async function handleUserSignUp(req, res) {
 
   // ✅ 4. Send OTP via email
   const transporter = nodemailer.createTransport({
-    service: 'gmail',
+     port: 587,
+    host: 'smtp.gmail.com',
+    secure: false, 
+    //service: 'gmail',
+    
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS
